@@ -1,0 +1,69 @@
+package main 
+import(
+    "fmt"
+    "net/http"
+	"github.com/gorilla/mux"
+	"enconding/json"
+	"strconv"
+)
+type Contacto struct{
+	ID_Contacto int `json:"id"`
+	NombreCompleto string `json:"name"`
+	Email string
+	TelMovil string
+	FechaCaptura string
+	TemaDeInteres *TemaDeInteres
+	Estado *Estado
+	Mensaje string
+}
+type TemaDeInteres struct {
+	ID_TemaDeInteres int 
+	Nombre string 
+}
+type Estado struct {
+	ID_Estado int 
+	NombreEstdo string 
+}
+var (
+	contador int
+	contador2 int
+	contactos []Contacto
+)
+
+func main(){
+	ftm.Println("Bienhechores")
+	// http.HandleFunc("/",LandingPage)
+	contactos=append(contactos, Contactos{ID_Contacto:1, NombreCompleto ="Joss", TemaDeInteres: &TemaDeInteres{ID_TemaDeInteres:1, Nombre: "Estadía"}, Estad: &Estado{ID_Estado:1, NombreEstdo: México} })
+
+	router := mux.NewRouter()
+	router.HandleFunc("/",LandingPage).Methods("GET")
+	//router.HandleFunc("/contactos", GetContactosEndPoint).Methods("GET")
+	router.HandleFunc("/contacto", PostContactoEndPoint).Methods("POST")
+
+	 http.ListenAndServe("localhost:3030", router)
+}
+func LandingPage(w http.ResponseWriter, r *http.Request){
+	contador :=contador++
+	ftm.Println("Request!")
+	ftm.Println("Vistas: ", contador)
+	ftm.Fprintf(w, "<http><body><br /><br />Petición recibida!</body></html>")
+}
+/*func GetContactosEndPoint(w http.ResponseWriter, r *http.Request){
+	ftm.Println("-Reporte de contactos!")
+	json.NewEncoder(w).Encode(contactos)
+}*/
+/*func GetContactoEndPoint(w http.ResponseWriter, r *http.Request){
+	params :=mux.Vars(r)
+	indice, _ := strconv.Atoi(params["idx"])
+	
+	json.NewEncoder(w).Encode(contactos[indice])
+}*/
+func PostContactoEndPoint(){
+	json.NewEncoder(w).Encode(contactos[indice])
+	params :=mux.Vars(r)
+	indice, _ := strconv.Atoi(params["idx"])
+	for indice{
+		contador2:=contador2[indice] 
+	}
+	ftm.Println("El total de registros es: ", contador2)
+}
